@@ -3,7 +3,7 @@ FROM alpine:${ALPINE_VERSION}
 
 ENV ZPUSH_VERSION=2.7.6
 ENV ZPUSH_URL=https://github.com/Z-Hub/Z-Push/archive/refs/tags/${ZPUSH_VERSION}.tar.gz
-ENV PHP_VERSION=84
+ENV PHP_VERSION=83
 ENV PHP_INI_DIR=/etc/php${PHP_VERSION}
 
 WORKDIR /usr/share/z-push
@@ -36,13 +36,15 @@ ENV BACKEND_PROVIDER=BackendIMAP \
 # --- Add dependancies ---
 # ------------------------
 RUN apk update && apk add --no-cache \
-    supervisor \
-    curl \
     bash \
+    composer \
+    curl \
     less \
     nano \
     nginx \
     php${PHP_VERSION} \
+    php${PHP_VERSION}-bcmath \
+    php${PHP_VERSION}-cli \
     php${PHP_VERSION}-cli \
     php${PHP_VERSION}-curl \
     php${PHP_VERSION}-fpm \
@@ -60,6 +62,7 @@ RUN apk update && apk add --no-cache \
     php${PHP_VERSION}-posix \
     php${PHP_VERSION}-soap \
     php${PHP_VERSION}-simplexml \
+    supervisor \
     tzdata
 
 # ----------------------------------------
